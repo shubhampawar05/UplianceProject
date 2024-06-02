@@ -1,13 +1,15 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Counter from "./counter/Counter";
-import Header from "./header/Header";
-import Editor from "./Editor/Editor";
-import UserData from "./UserData/UserData";
+import Counter from "./Pages/counter/Counter";
+import Header from "./Pages/header/Header";
+import Editor from "./Pages/Editor/Editor";
+import UserData from "./Pages/UserData/UserData";
+import Authentication from "./Pages/authentication/Authentication";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CounterProtectedRoute from "./ProtectedRoute/CounterProtectedRoute";
 
 
 function App() {
@@ -17,7 +19,10 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<Counter />} />
+            <Route path="/login" element={<Authentication />} />
+            <Route path="/" element={<CounterProtectedRoute>
+              <Counter />
+              </CounterProtectedRoute>} />
             <Route path="/UserData" element={<UserData />} />
             <Route path="/Editors" element={<Editor />} />
           </Routes>

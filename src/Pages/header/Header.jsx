@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 
@@ -8,7 +8,14 @@ const Header = () => {
 
   const {pathname} = useLocation();
   console.log(pathname);
+  const isAuthenticated = !!localStorage.getItem('userEmail');
+  const navigate = useNavigate()
 
+  const logOutfun = ()=>{
+    localStorage.clear('userEmail');
+    navigate('/login')
+
+  }
   return (
     <div className=" sticky top-0 left-0 right-0 z-10 w-screen flex justify-between items-center bg-transparent backdrop-blur-3xl shadow-lg py-4 px-12 ">
      <Link to={'/'}> <div className=" cursor-pointer text-black text-xl font-semibold"> LoGo </div></Link>
@@ -26,7 +33,7 @@ const Header = () => {
             <button className={`${pathname==='/Editors' ? "border-b-2 border-red-600 rounded-md px-1"  : ''} `} >Editors</button>
           </Link>
         </div>
-        <button className=" border text-white px-4 py-1 font-semibold  bg-black">LOGIN</button>{" "}
+      {isAuthenticated && <Link to={'/login'}>  <button onClick={logOutfun} className=" border text-white px-4 py-1 font-semibold  bg-red-500">LOGOUT</button>{" "}</Link>}
       </div>
     </div>
   );

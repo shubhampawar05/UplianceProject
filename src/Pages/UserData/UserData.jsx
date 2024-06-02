@@ -109,7 +109,7 @@ const UserData = () => {
     {show === false ? <Button onClick={saveHandler} radius="full" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
       Save
     </Button>:
-    <Link>
+    <Link to={'/'}>
     <Button radius="full" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
     Home 
   </Button>

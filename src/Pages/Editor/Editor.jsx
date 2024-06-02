@@ -54,7 +54,7 @@ const Editor = () => {
 
   return (
     <div className=" w-full h-screen py-8">
-      <div className=" max-w-screen-md mx-auto py-12 h-[80vh] shadow-xl">
+      <div className=" max-w-screen-md mx-auto py-12 h-[80vh] shadow-xl bg-[#f4f4f5]">
         <ReactQuill
           value={value}
           onChange={setDataHandler}
