@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 
 
@@ -16,24 +17,68 @@ const Header = () => {
     navigate('/login')
 
   }
-  return (
-    <div className=" sticky top-0 left-0 right-0 z-10 w-screen flex justify-between items-center bg-transparent backdrop-blur-3xl shadow-lg py-4 px-12 ">
-     <Link to={'/'}> <div className=" cursor-pointer text-black text-xl font-semibold"> LoGo </div></Link>
 
-      <div className="flex gap-12">
-        <div className="flex gap-6 font-semibold text-xl ">
-          <Link to={"/"}>
-            <button className={`${pathname==='/' ? "border-b-2 border-red-600 rounded-md px-1"  : ''} `} >Counter </button>
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+  return (
+    <div className="sticky  top-0 z-10 bg-transparent backdrop-blur-xl sm:flex sm:justify-between shadow-lg sm:py-4 py-2 sm:px-12 px-4">
+      <div className="flex justify-between items-center">
+        <Link to="/">
+          <div className="cursor-pointer text-black sm:text-xl text-lg font-bold">Upliance</div>
+        </Link>
+        <button className="sm:hidden text-2xl" onClick={toggleMenu}>
+        {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+      <div className={`sm:flex ${menuOpen ? 'block' : 'hidden'} flex-col sm:flex-row sm:gap-12 gap-4 sm:items-center`}>
+        <div className="flex flex-col sm:flex-row sm:gap-6 gap-2 font-semibold sm:text-xl text-lg">
+          <Link to="/">
+            <button
+              className={`${
+                pathname === '/'
+                  ? 'border-b-2 border-red-600 rounded-md px-1'
+                  : ''
+              }`}
+            >
+              Counter
+            </button>
           </Link>
-          <Link to={"/UserData"}>
-            <button className={`${pathname==='/UserData' ? "border-b-2 border-red-600 rounded-md px-1"  : ''} `}>UserData</button>
+          <Link to="/UserData">
+            <button
+              className={`${
+                pathname === '/UserData'
+                  ? 'border-b-2 border-red-600 rounded-md px-1'
+                  : ''
+              }`}
+            >
+              UserData
+            </button>
           </Link>
-          <Link to={"/Editors"}>
-            {" "}
-            <button className={`${pathname==='/Editors' ? "border-b-2 border-red-600 rounded-md px-1"  : ''} `} >Editors</button>
+          <Link to="/Editors">
+            <button
+              className={`${
+                pathname === '/Editors'
+                  ? 'border-b-2 border-red-600 rounded-md px-1'
+                  : ''
+              }`}
+            >
+              Editors
+            </button>
           </Link>
         </div>
-      {isAuthenticated && <Link to={'/login'}>  <button onClick={logOutfun} className=" border text-white px-4 py-1 font-semibold  bg-red-500">LOGOUT</button>{" "}</Link>}
+        {isAuthenticated && (
+          <Link to="/login">
+            <button
+              onClick={logOutfun}
+              className="border text-white px-4 py-1 font-semibold bg-red-500"
+            >
+              LOGOUT
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

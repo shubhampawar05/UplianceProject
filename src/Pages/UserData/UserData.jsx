@@ -71,7 +71,7 @@ const UserData = () => {
     }
   }
   return (
- <div className=" max-w-screen-md mx-auto py-12">
+ <div className="relative max-w-screen-md mx-auto py-12 z-0 px-4">
    {show === false ? <div className="flex flex-col w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
          <Input onChange={(e)=>setName(e.target.value)} size='lg' type="name" label="Name" placeholder="Enter your Name" />
          <Input onChange={(e)=>setEmail(e.target.value)} required size='lg' type="email" label="Email" placeholder="Enter your email" />
