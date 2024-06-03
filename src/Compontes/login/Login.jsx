@@ -7,7 +7,7 @@ import { auth } from "../../fireBase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-const Login = ({setIsLogin}) => {
+const Login = ({setIsLogin,handleSignInWithGoogle}) => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const navigate = useNavigate()
@@ -38,7 +38,7 @@ const Login = ({setIsLogin}) => {
           toast.dismiss();
           toast.error(error.message, {
             position: "top-right",
-            autoClose: 300,
+            autoClose: 800,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -53,7 +53,7 @@ const Login = ({setIsLogin}) => {
         toast.dismiss();
         toast.error('All Fields are Requierd', {
           position: "top-right",
-          autoClose: 300,
+          autoClose: 800,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -69,16 +69,18 @@ const Login = ({setIsLogin}) => {
           <h2 className="p-3 text-3xl font-bold text-pink-400">Upliance</h2>
           <div className="inline-block border-[1px] justify-center w-20 border-blue-400 border-solid"></div>
           <h3 className="text-xl font-semibold text-blue-400 pt-2">Sign In!</h3>
+
           <div className="flex space-x-2 m-4 items-center justify-center">
-          <div className="text-xl cursor-pointer border-white">
-                  <FaFacebook className="text-white"/>
-                  </div>
-                  <div className="text-xl cursor-pointer border-white">
-                  <FaGithub className="text-white"/>
-                  </div>
-                  <div className="text-xl cursor-pointer border-white">
-                  <FaGoogle className="text-white"/>  
-                  </div>
+            <div className="text-xl cursor-pointer border-white">
+            <FaGoogle onClick={handleSignInWithGoogle} className="text-red-400"/>  
+            </div>
+            <div className="text-xl cursor-pointer border-white">
+            <FaFacebook className="text-blue-400"/>
+            </div>
+            <div className="text-xl cursor-pointer border-white">
+            <FaGithub className="text-black"/>
+            </div>
+                 
           </div>
           {/* Inputs */}
           <div className="flex flex-col items-center justify-center">

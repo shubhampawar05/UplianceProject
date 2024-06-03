@@ -31,8 +31,8 @@ const UserData = () => {
     const handleBeforeUnload = (e) => {
       if (isModified) {
         const message = 'You have unsaved changes, do you really want to leave?';
-        e.returnValue = message; // Standard for most browsers
-        return message; // For some older browsers
+        e.returnValue = message; 
+        return message; 
       }
     };
     
@@ -57,7 +57,7 @@ const UserData = () => {
       toast.dismiss()
       toast.success(' Details Saved Successfully', {
         position: "top-right",
-        autoClose: 300,
+        autoClose: 800,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -77,7 +77,7 @@ const UserData = () => {
       toast.dismiss();
       toast.error(' All Fields are Required', {
         position: "top-right",
-        autoClose: 300,
+        autoClose: 800,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

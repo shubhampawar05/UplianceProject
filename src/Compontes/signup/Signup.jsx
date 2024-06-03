@@ -8,7 +8,7 @@ import { auth } from "../../fireBase/config";
 import { toast } from "react-toastify";
 
 
-const Signup = ({setIsLogin}) => {
+const Signup = ({setIsLogin,handleSignInWithGoogle}) => {
 
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
@@ -28,7 +28,7 @@ const Signup = ({setIsLogin}) => {
               toast.dismiss();
               toast.success(' Account Created successfully', {
                 position: "top-right",
-                autoClose: 300,
+                autoClose: 800,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -42,7 +42,7 @@ const Signup = ({setIsLogin}) => {
               toast.dismiss();
               toast.error(error.message, {
                 position: "top-right",
-                autoClose: 300,
+                autoClose: 800,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -57,7 +57,7 @@ const Signup = ({setIsLogin}) => {
           toast.dismiss();
           toast.error('All Fields are Requierd', {
             position: "top-right",
-            autoClose: 300,
+            autoClose: 800,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -78,15 +78,15 @@ const Signup = ({setIsLogin}) => {
             Create Account!
           </h3>
           <div className="flex space-x-2 m-4 items-center justify-center">
+          <div className="text-xl cursor-pointer border-white">
+            <FaGoogle onClick={handleSignInWithGoogle} className="text-red-500"/>  
+            </div>
             <div className="text-xl cursor-pointer border-white">
-                  <FaFacebook className="text-white"/>
-                  </div>
-                  <div className="text-xl cursor-pointer border-white">
-                  <FaGithub className="text-white"/>
-                  </div>
-                  <div className="text-xl cursor-pointer border-white">
-                  <FaGoogle className="text-white"/>  
-                  </div>
+            <FaFacebook className="text-white"/>
+            </div>
+            <div className="text-xl cursor-pointer border-white">
+            <FaGithub className="text-black"/>
+            </div>
           </div>
           {/* Inputs */}
           <div className="flex flex-col items-center justify-center mt-2">
