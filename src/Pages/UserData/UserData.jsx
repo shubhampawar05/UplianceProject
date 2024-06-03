@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import {Input} from "@nextui-org/input";
@@ -25,6 +25,23 @@ const UserData = () => {
   const [mobilNo, setMobilNo] = useState('');
   const [data, setData]=useState({});
   const [show , setShow]=useState(false);
+  const [isModified, setIsModified] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (isModified) {
+        const message = 'You have unsaved changes, do you really want to leave?';
+        e.returnValue = message; // Standard for most browsers
+        return message; // For some older browsers
+      }
+    };
+    
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isModified]);
 
 
 
@@ -38,7 +55,7 @@ const UserData = () => {
         id: nanoid(8) 
       })
       toast.dismiss()
-      toast.success('🦄 Wow so easy!', {
+      toast.success(' Details Saved Successfully', {
         position: "top-right",
         autoClose: 300,
         hideProgressBar: false,
@@ -51,13 +68,14 @@ const UserData = () => {
         });
 
       setShow(true);
+      setIsModified(false);
 
     }else{
       window.addEventListener('beforeunload',()=>{
         alert('may be you should lost your data please save data ')
       })
       toast.dismiss();
-      toast.error('🦄 Wow so easy!', {
+      toast.error(' All Fields are Required', {
         position: "top-right",
         autoClose: 300,
         hideProgressBar: false,
@@ -70,13 +88,18 @@ const UserData = () => {
         setShow(false);
     }
   }
+
+  const handleChange = (setter) => (event) => {
+    setter(event.target.value);
+    setIsModified(true);
+  };
   return (
  <div className="relative max-w-screen-md mx-auto py-12 z-0 px-4">
    {show === false ? <div className="flex flex-col w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-         <Input onChange={(e)=>setName(e.target.value)} size='lg' type="name" label="Name" placeholder="Enter your Name" />
-         <Input onChange={(e)=>setEmail(e.target.value)} required size='lg' type="email" label="Email" placeholder="Enter your email" />
-         <Input onChange={(e)=>setAddress(e.target.value)} size='lg' type="text" label="Address" placeholder="Enter your Address" />
-         <Input onChange={(e)=>setMobilNo(e.target.value)} size='lg' type="number" label="Mobile No" placeholder="Enter your Mobile No." />
+         <Input onChange={handleChange(setName)} size='lg' type="name" label="Name" placeholder="Enter your Name" />
+         <Input onChange={handleChange(setEmail)} required size='lg' type="email" label="Email" placeholder="Enter your email" />
+         <Input onChange={handleChange(setAddress)} size='lg' type="text" label="Address" placeholder="Enter your Address" />
+         <Input onChange={handleChange(setMobilNo)} size='lg' type="number" label="Mobile No" placeholder="Enter your Mobile No." />
     </div>
     :
     <>

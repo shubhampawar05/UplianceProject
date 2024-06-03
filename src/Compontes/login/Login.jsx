@@ -21,7 +21,7 @@ const Login = ({setIsLogin}) => {
           console.log( 'form login page',user.email);
           localStorage.setItem('userEmail', user.email)
           toast.dismiss();
-          toast.success(' Account Created successfully', {
+          toast.success(' Login successfully', {
             position: "top-right",
             autoClose: 300,
             hideProgressBar: false,
